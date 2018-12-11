@@ -6,9 +6,10 @@ Tumblr.configure do |config|
   config.consumer_secret = ENV['TUMBLR_SECRET']
 end
 FOLDER_LOCATION='./'
-@tumblr_client=Tumblr::Client.new(client: :httpclient)
+@tumblr_client = Tumblr::Client.new(client: :httpclient)
 def getTumblrPost_Filter(loc)
-  #ok just for te sake of sanity ... 
+  # ok just for te sake of sanity ... we are going to filter our original
+  # getTumblrPost because otherwise it will pull down a random image.
   standard_post=/^(?:http||https):\/\/\S+.tumblr.com\/post\/\d+\/(?:[^\/]+)$/
   cutdown_post=/((?:http||https):\/\/\S+.tumblr.com\/post\/\d+\/\S+)\/\S+/
   loc=cutdown_post.match(loc)[1] if(standard_post.match(loc).nil?)
